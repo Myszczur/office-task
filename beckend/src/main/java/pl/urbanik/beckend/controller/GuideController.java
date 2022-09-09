@@ -1,7 +1,6 @@
 package pl.urbanik.beckend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.urbanik.beckend.model.Guide;
 import pl.urbanik.beckend.service.GuideService;
@@ -9,9 +8,10 @@ import pl.urbanik.beckend.service.GuideService;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost8080/", maxAge = 3600)
 @RequiredArgsConstructor
-@RequestMapping("/guide")
+@RequestMapping("/api")
 public class GuideController {
 
     private final GuideService guideService;
@@ -26,7 +26,7 @@ public class GuideController {
         return guideService.getGuide(guideId);
     }
 
-    @GetMapping
+    @GetMapping("/guides")
     public List<Guide> getGuides() {
         return guideService.getGuides();
     }
