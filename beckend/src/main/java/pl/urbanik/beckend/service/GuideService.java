@@ -12,9 +12,9 @@ public interface GuideService {
 
     List<Guide> getGuides();
 
-    Optional<Guide> getGuide(Long guideId);
+    Guide getGuideById(Long guideId);
 
-    Optional<Guide> updateGuide(Long guideId, Guide updatedGuide);
+    Guide updateGuide(Guide updatedGuide);
 
     void deleteGuide(Long guideId);
 }

@@ -1,43 +1,44 @@
 package pl.urbanik.beckend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.urbanik.beckend.model.Guide;
 import pl.urbanik.beckend.service.GuideService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost8080/", maxAge = 3600)
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/guide")
 public class GuideController {
 
     private final GuideService guideService;
 
     @PostMapping
-    public Guide addGuide(Guide guide) {
-        return guideService.addGuide(guide);
+    public ResponseEntity<Guide> addGuide(@RequestBody Guide guide) {
+        return new ResponseEntity<>(guideService.addGuide(guide), HttpStatus.OK);
     }
 
     @GetMapping("/{guideId}")
-    public Optional<Guide> getGuide(@PathVariable("guideId") Long guideId) {
-        return guideService.getGuide(guideId);
+    public ResponseEntity<Guide> getGuideById(@PathVariable Long guideId) {
+        return new ResponseEntity<>(guideService.getGuideById(guideId), HttpStatus.CREATED);
     }
 
-    @GetMapping("/guides")
-    public List<Guide> getGuides() {
-        return guideService.getGuides();
+    @GetMapping
+    public ResponseEntity<List<Guide>> getAllGuides() {
+        return new ResponseEntity<>(guideService.getGuides(), HttpStatus.OK);
     }
 
-    @PutMapping("/{guideId}")
-    public Optional<Guide> updateGuide(@PathVariable("guideId") Long guideId, Guide updatedGuide) {
-        return guideService.updateGuide(guideId, updatedGuide);
+    @PutMapping
+    public ResponseEntity<Guide> updateGuide(@RequestBody Guide updatedGuide) {
+        return new ResponseEntity<>(guideService.updateGuide(updatedGuide), HttpStatus.OK);
     }
 
     @DeleteMapping("/{guideId}")
-    public void deleteGuide(@PathVariable("guideId") Long guideId) {
+    public ResponseEntity<?> deleteGuide(@PathVariable("guideId") Long guideId) {
         guideService.deleteGuide(guideId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

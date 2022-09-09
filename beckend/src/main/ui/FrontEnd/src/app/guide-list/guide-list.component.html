@@ -7,6 +7,7 @@
     <th>Surname</th>
     <th>Phone Number</th>
     <th>Identity</th>
+    <th>Actions</th>
  </tr>
   </thead>
   <tbody>
@@ -16,6 +17,8 @@
     <td>{{guide.surname}}</td>
     <td>{{guide.phoneNumber}}</td>
     <td>{{guide.identity}}</td>
+    <td><button (click) = "updateGuide(guide.id)" class="btn btn-info">Update</button>
+    </td>
   </tr>
   </tbody>
 </table>

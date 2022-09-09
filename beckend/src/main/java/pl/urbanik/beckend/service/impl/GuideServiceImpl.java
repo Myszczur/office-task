@@ -17,8 +17,7 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public Guide addGuide(Guide guide) {
-        guideRepository.save(guide);
-        return guide;
+        return guideRepository.save(guide);
     }
 
     @Override
@@ -27,14 +26,13 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
-    public Optional<Guide> getGuide(Long guideId) {
-        return Optional.of(guideRepository.findById(guideId).orElseThrow());
+    public Guide getGuideById(Long guideId) {
+        return guideRepository.findById(guideId).orElseThrow(() -> new RuntimeException("Guid not exist with id: " + guideId));
     }
 
     @Override
-    public Optional<Guide> updateGuide(Long guideId, Guide updatedGuide) {
-        return guideRepository.findById(guideId)
-                .map(oldGuide -> guideRepository.save(updatedGuide));
+    public Guide updateGuide(Guide updatedGuide) {
+        return guideRepository.save(updatedGuide);
     }
 
     @Override
