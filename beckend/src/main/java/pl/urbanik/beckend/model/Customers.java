@@ -21,6 +21,6 @@ public class Customers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String surName;
+    private String surname;
     private String passportNumber;
 }

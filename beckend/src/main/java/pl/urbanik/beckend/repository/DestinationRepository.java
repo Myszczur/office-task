@@ -6,4 +6,5 @@ import pl.urbanik.beckend.model.Destination;
 
 @Repository
 public interface DestinationRepository extends JpaRepository<Destination, Long> {
+
 }

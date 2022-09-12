@@ -2,6 +2,7 @@ package pl.urbanik.beckend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.urbanik.beckend.exceptions.NotFoundException;
 import pl.urbanik.beckend.model.Guide;
 import pl.urbanik.beckend.repository.GuideRepository;
 import pl.urbanik.beckend.service.GuideService;
@@ -17,8 +18,7 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public Guide addGuide(Guide guide) {
-        guideRepository.save(guide);
-        return guide;
+        return guideRepository.save(guide);
     }
 
     @Override
@@ -27,14 +27,13 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
-    public Optional<Guide> getGuide(Long guideId) {
-        return Optional.of(guideRepository.findById(guideId).orElseThrow());
+    public Guide getGuideById(Long guideId) {
+        return guideRepository.findById(guideId).orElseThrow(() -> new NotFoundException("Guid not exist with id: " + guideId));
     }
 
     @Override
-    public Optional<Guide> updateGuide(Long guideId, Guide updatedGuide) {
-        return guideRepository.findById(guideId)
-                .map(oldGuide -> guideRepository.save(updatedGuide));
+    public Guide updateGuide(Guide updatedGuide) {
+        return guideRepository.save(updatedGuide);
     }
 
     @Override
