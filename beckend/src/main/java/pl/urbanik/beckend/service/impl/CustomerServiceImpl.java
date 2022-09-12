@@ -2,7 +2,7 @@ package pl.urbanik.beckend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.urbanik.beckend.exceptions.CustomerNotFoundException;
+import pl.urbanik.beckend.exceptions.NotFoundException;
 import pl.urbanik.beckend.model.Customers;
 import pl.urbanik.beckend.repository.CustomersRepository;
 import pl.urbanik.beckend.service.CustomerService;
@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customers getCustomerById(Long id) {
         return customersRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer not exist with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer not exist with id: " + id));
     }
 
     @Override
